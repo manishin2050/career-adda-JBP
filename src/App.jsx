@@ -11,7 +11,7 @@ import {
   Star,
   BriefcaseBusiness,
   Code2,
-  PaintBucketIcon,
+  PaintBucketIcon, ArrowLeft, ArrowRight
 } from "lucide-react";
 import { FaAmericanSignLanguageInterpreting, FaBullhorn, FaPaintBrush, FaPalette } from "react-icons/fa";
 import { BiMoney } from "react-icons/bi";
@@ -23,9 +23,55 @@ import { AiOutlineNotification } from "react-icons/ai";
 import { CgNotes } from "react-icons/cg";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { PiOfficeChairBold } from "react-icons/pi";
-import { BsPersonRaisedHand } from "react-icons/bs";
+import { BsInstagram, BsLinkedin, BsPersonRaisedHand, BsTelegram, BsWhatsapp, BsYoutube } from "react-icons/bs";
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation, Autoplay } from 'swiper/modules'; // Added Autoplay
+// import { ArrowLeft, ArrowRight } from 'lucide-react';
+
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 export default function CareerAddaLandingPage() {
+  const images = [
+    {
+      src: "https://imgs.search.brave.com/_gUKH01aPWj1LBUggrT--QfY7jIvAFXoJGG2KiaPaSo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9sdXh1/cnl3YXRjaGJ1eWVy/LmNvbS93cC1jb250/ZW50L3VwbG9hZHMv/MjAxNi8wMi9QSUFH/RVRfUG9sb19MYWRp/ZXNfR29sZF9SaWhh/bm5hLmpwZw",
+      alt: "Testimonial 1",
+      description: "Career Adda helped me get my first internship in Jabalpur. Amazing support and verified updates!",
+      name: "Shifa Ansari",
+      role: "Student"
+    },
+    {
+      src: "https://imgs.search.brave.com/_gUKH01aPWj1LBUggrT--QfY7jIvAFXoJGG2KiaPaSo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9sdXh1/cnl3YXRjaGJ1eWVy/LmNvbS93cC1jb250/ZW50L3VwbG9hZHMv/MjAxNi8wMi9QSUFH/RVRfUG9sb19MYWRp/ZXNfR29sZF9SaWhh/bm5hLmpwZw",
+      alt: "Testimonial 2",
+      description: "Career Adda helped me get my first internship in Jabalpur. Amazing support and verified updates!",
+      name: "Manish Kumar",
+      role: "Developer"
+    },
+    {
+      src: "https://imgs.search.brave.com/_gUKH01aPWj1LBUggrT--QfY7jIvAFXoJGG2KiaPaSo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9sdXh1/cnl3YXRjaGJ1eWVy/LmNvbS93cC1jb250/ZW50L3VwbG9hZHMv/MjAxNi8wMi9QSUFH/RVRfUG9sb19MYWRp/ZXNfR29sZF9SaWhh/bm5hLmpwZw",
+      alt: "Testimonial 3",
+      description: "Career Adda helped me get my first internship in Jabalpur. Amazing support and verified updates!",
+      name: "Rahul Sharma",
+      role: "Business Owner"
+    },
+    {
+      src: "https://imgs.search.brave.com/_gUKH01aPWj1LBUggrT--QfY7jIvAFXoJGG2KiaPaSo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9sdXh1/cnl3YXRjaGJ1eWVy/LmNvbS93cC1jb250/ZW50L3VwbG9hZHMv/MjAxNi8wMi9QSUFH/RVRfUG9sb19MYWRp/ZXNfR29sZF9SaWhh/bm5hLmpwZw",
+      alt: "Testimonial 1",
+      description: "Career Adda helped me get my first internship in Jabalpur. Amazing support and verified updates!",
+      name: "Anjali Verma",
+      role: "Designer"
+    },
+    
+  // "https://imgs.search.brave.com/T1IeFccNV9Zc-RFGu8O7W7NrEftHxBhq6h3hUMWswWA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZXNxdWlyZS5jb20u/YXUvd3AtY29udGVu/dC91cGxvYWRzLzIw/MjQvMDcvMTgwMHgy/NDAwLVRlbXBsYXRl/LTIwMjQtMDctMDlU/MTM1OTMxLjMwNy03/Njh4MTAyNC5qcGc",
+  // "https://imgs.search.brave.com/_gUKH01aPWj1LBUggrT--QfY7jIvAFXoJGG2KiaPaSo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9sdXh1/cnl3YXRjaGJ1eWVy/LmNvbS93cC1jb250/ZW50L3VwbG9hZHMv/MjAxNi8wMi9QSUFH/RVRfUG9sb19MYWRp/ZXNfR29sZF9SaWhh/bm5hLmpwZw",
+  // "https://imgs.search.brave.com/sbc1xL_tYArZfZ0owHIFoHWL0CiXKprxmAX3PDrER6o/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ibG9n/LmNyb3duYW5kY2Fs/aWJlci5jb20vd3At/Y29udGVudC91cGxv/YWRzLzIwMTcvMDUv/Y2VsZWJyaXR5LXdh/dGNoZXMta2V2aW4t/aGFydC1oYXV0ZXRp/bWUuanBn",
+  // "https://imgs.search.brave.com/FMP-4spWMse7fgPDrtE2fprPlf74-jUWns2wlPUYZho/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZXNxdWlyZS5jb20u/YXUvd3AtY29udGVu/dC91cGxvYWRzLzIw/MjQvMDcvMTgwMHgy/NDAwLVRlbXBsYXRl/LTIwMjQtMDctMDlU/MTIzMTE2LjI5NC03/Njh4MTAyNC5qcGc",
+  // "https://imgs.search.brave.com/o1qahnGsjg2ovZP_No1yqePNmw3al3stCFQy7TulZw4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/bW9zLmNtcy5mdXR1/cmVjZG4ubmV0L3do/b3doYXR3ZWFyL3Bv/c3RzLzMwMTUzOS9j/ZWxlYnJpdHktd2F0/Y2hlcy0zMDE1Mzkt/MTY1OTUzOTQwNTA5/MS1tYWluLmpwZw",
+  // "https://imgs.search.brave.com/CCg3GdAWuGHDNkyVOjczS44GoZOBrQltvXFIQrmrz-c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/dGl0YW4uY28uaW4v/ZHcvaW1hZ2UvdjIv/QktERF9QUkQvb24v/ZGVtYW5kd2FyZS5z/dGF0aWMvLS9TaXRl/cy10aXRhbi1tYXN0/ZXItY2F0YWxvZy9k/ZWZhdWx0L2R3OTJl/ZDY4OWMvaW1hZ2Vz/L0hlbGlvcy9DYXRh/bG9nL1BMUEVXR0Ux/NjAxODAxXzIuanBn/P3N3PTM2MCZzaD0z/NjA",
+  // "https://imgs.search.brave.com/tzXcq3XAFOE1ZdLtAV8sFYabBjlq1vYlmZMPN5RFhok/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hbXou/bHV4ZXdhdGNoZXMu/Y28udWsvYXBwL3Vw/bG9hZHMvMjAyMi8w/OC8xMjA1NTI0Ni9K/ZW5uaWZlci1Bbmlz/dG9uLWNoYXJtcy13/aXRoLWEtR29sZC1S/b2xleC13YXRjaC5q/cGc",
+];
   const services = [
     {
       title:"Job Update",
@@ -86,7 +132,7 @@ export default function CareerAddaLandingPage() {
   return (
     <div  className=" text-black bg-gray-100 min-h-screen overflow-hidden">
       {/* Navbar */}
-      <nav className="flex items-center justify-between px-8 py-5  fixed w-full top-0 z-50 ">
+      <nav className="flex items-center justify-between px-8 py-5  absolute w-full top-0 z-50 ">
         <h1 className=" text-white text-2xl font-bold tracking-wide">
           Career <span className="text-yellow-400">Adda</span>
         </h1>
@@ -161,9 +207,10 @@ export default function CareerAddaLandingPage() {
             {/* <div className="absolute inset-0 "></div> */}
 
             <img
-              src="./img/girl.png"
+              // src="./img/girl.png"
+              src="./img/girl2.webp"
               alt="career"
-              className="object-cover  object-[10%_top] h-[90%]"
+              className="object-cover object-[10%_top] h-[90%]"
             />
 
             {/* Floating Card */}
@@ -238,6 +285,9 @@ export default function CareerAddaLandingPage() {
           <h2 className="text-3xl mt-3 font-bold">
             Explore Top Opportunities
           </h2>
+        <span className=" tracking-wide leading-medium mt-2 px-2 py-1 text-sm text-gray-800">
+                    Discover jobs and internship in leading categories.
+                  </span>
       </div>
 
         <div className="grid md:grid-cols-6 gap-6">
@@ -365,7 +415,7 @@ export default function CareerAddaLandingPage() {
         </div>
       </section>
 
-      {/* Features */}
+      {/* Features 
       <section className="px-8 md:px-20 py-10">
         <div className="grid md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
@@ -380,81 +430,183 @@ export default function CareerAddaLandingPage() {
           ))}
         </div>
       </section>
-
+        */}
       {/* Testimonials */}
       <section className="px-8 md:px-20 py-20">
         <div className="bg-gradient-to-r from-blue-900 to-[#0B1A2E] rounded-[40px] p-10 border border-white/10">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold">
-              Trusted by <span className="text-yellow-400">Students</span>
-            </h2>
 
             <p className="text-gray-400 mt-3">
-              Real success stories from our community.
+              WHAT PEOPLE SAY
             </p>
+            <h2 className="text-4xl mt-5 text-white font-bold">
+              Trusted by <span className="text-yellow-400">Students</span> & <span className="text-yellow-400">Businesses</span> 
+            </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
-              <div
-                key={item}
-                className="bg-white/5 rounded-3xl p-8 border border-white/10 hover:bg-white/10 transition"
+          <div className="relative w-full">
+        <Swiper
+          grabCursor={true}
+          loop={true}
+          centeredSlides={false}
+          spaceBetween={30}
+          slidesPerView={1}
+          autoplay={{
+            delay: 1000, // Time between slides in ms
+            disableOnInteraction: false, // Keep autoplay even after manual interaction
+          }}
+          breakpoints={{
+            768: {
+              slidesPerView: 3,
+            },
+            1024: {
+              slidesPerView: 3,
+            },
+          }}
+          pagination={{ el: '.swiper-pagination', clickable: true }}
+          navigation={{
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          }}
+          modules={[Pagination, Navigation, Autoplay]} // Added Autoplay
+          className="mySwiper"
+        >
+          {images.map((src, index) => (
+            <SwiperSlide
+              key={index}
+                className="bg-white/5  rounded-3xl p-8 border border-white/10 hover:bg-white/10 transition"
               >
                 <p className="text-gray-300">
-                  “Career Adda helped me get my first internship in Jabalpur.
-                  Amazing support and verified updates!”
+                  {/* “Career Adda helped me get my first internship in Jabalpur.
+                  Amazing support and verified updates!” */}
+                  {src.description}
                 </p>
 
                 <div className="flex items-center gap-4 mt-6">
                   <img
-                    src={`https://i.pravatar.cc/100?img=${item + 10}`}
-                    alt="user"
+                    src={src.src}
+                    alt={src.alt}
                     className="w-14 h-14 rounded-full"
                   />
 
                   <div>
-                    <h4 className="font-semibold">Rahul Sharma</h4>
-                    <p className="text-sm text-gray-400">Student</p>
+                    <h4 className="font-semibold text-white">{src.name}</h4>
+                    <p className="text-sm text-gray-400">{src.role}</p>
                   </div>
                 </div>
-              </div>
-            ))}
+            </SwiperSlide>
+          ))}
+
+          {/* Navigation Buttons */}
+          <div className="swiper-button-prev md:p-10 text-white text-3xl absolute left-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer">
+            <ArrowLeft />
           </div>
+          <div className="swiper-button-next md:p-10 text-white text-3xl absolute right-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer">
+            <ArrowRight />
+          </div>
+
+          {/* Pagination Dots */}
+          <div className="swiper-pagination mt-6 !static text-white" />
+        </Swiper>
+      </div>
+
         </div>
       </section>
+      
 
-      {/* CTA */}
-      <section className="px-8 md:px-20 pb-20">
-        <div className="bg-yellow-400 text-black rounded-[40px] p-12 text-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.5),transparent)]"></div>
 
-          <h2 className="text-4xl md:text-5xl font-extrabold relative z-10">
-            Ready to Start Your Career Journey?
-          </h2>
+      {/* Whatsapp Channel */}
+      <section className="px-8  md:px-20 py-10">
+        <div className="border border-black/5 grid md:grid-cols-2 rounded-md shadow-md">
+          <div className=" p-10 ">
+            <span className=" tracking-wide leading-medium bg-indigo-100 border border-black/10 px-2 py-1 font-semibold  rounded-full text-sm text-white-400">
+            DON'T MISS OPPORTUNITIES
+          </span>
+            <h2 className="text-3xl mt-5 font-bold ">
+              Get Job Update on <span className="text-green-400">WhatsApp</span> 
+            </h2>
 
-          <p className="mt-4 text-lg relative z-10">
-            Join Career Adda today and discover local opportunities.
-          </p>
+            <p className="text-gray-900 mt-4">
+              Join our WhatsApp channel for daily verified job updates in Jabalpur. Stay ahead in your career journey with real-time notifications and exclusive opportunities.
+            </p>
 
-          <button className="mt-8 bg-black text-white px-8 py-4 rounded-2xl font-bold hover:scale-105 transition relative z-10">
-            Get Started
-          </button>
-        </div>
+            <button className="flex gap-2 justify-center mt-8 bg-green-600 text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition">
+            <BsWhatsapp className="h-5 w-5" />  Join WhatsApp Channel
+            </button>
+          </div>
+          <div className="relative h-full w-full flex justify-end items-end">
+              <img
+                src="./img/mobile.png"
+                alt="career"
+                className="object-cover bg-green-400/10  "
+              />
+          </div>
+        </div>  
       </section>
+      
 
       {/* Footer */}
-      <footer className="border-t border-white/10 py-10 text-center text-gray-400">
-        <h3 className="text-2xl font-bold text-white">
-          Career <span className="text-yellow-400">Adda</span>
-        </h3>
+      <footer className="px-8 md:px-20 text-sm py-10 bg-[#0B1A2E] text-gray-400">
+        <div className="grid md:grid-cols-[20%_10%_10%_10%_auto] gap-5"> 
+          <div>
+            <h1 className="font-semibold text-white" >CAREER ADDA JBP</h1>
+            <p>your local career partner helping students. freshers & businesses grow together.</p>
+          </div>
+          <div>
+            <h2 className="font-bold text-white">Quick Links</h2>
+            <ul className="mt-2">
+              <li><a href="#" className="hover:text-yellow-400">Home</a></li>
+              <li><a href="#" className="hover:text-yellow-400">Job</a></li>
+              <li><a href="#" className="hover:text-yellow-400">Internship</a></li>
+              <li><a href="#" className="hover:text-yellow-400">Services</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2 className="font-bold text-white">For Job Seekers</h2>
+            <ul className="mt-2">
+              <li><a href="#" className="hover:text-yellow-400">Browse Jobs</a></li>
+              <li><a href="#" className="hover:text-yellow-400">Upload Resume</a></li>
+              <li><a href="#" className="hover:text-yellow-400">Career Guidance</a></li>
+              <li><a href="#" className="hover:text-yellow-400">Resources</a></li>
+            </ul>
+          </div>
+          <div><h2 className="font-bold text-white">For Employers</h2>
+            <ul className="mt-2">
+              <li><a href="#" className="hover:text-yellow-400">Post a Job</a></li>
+              <li><a href="#" className="hover:text-yellow-400">Find Candidate</a></li>
+              <li><a href="#" className="hover:text-yellow-400">Hiring Support</a></li>
+              <li><a href="#" className="hover:text-yellow-400">Contact Us</a></li>
+            </ul></div>
+          <div>
+            <h2 className="font-bold text-center  text-white">Follow us</h2>
+            <div className="flex justify-center gap-2 mt-5">
+              <a href="#" className="p-3 bg-pink-500/10 rounded-full">
+              <BsInstagram className="w-5 h-5 text-pink-500 hover:text-pink-400 cursor-pointer" />
+              </a>
+              <a href="#" className="p-3 bg-green-500/10 rounded-full">
+              <BsWhatsapp className="w-5 h-5 text-green-500 hover:text-green-400 cursor-pointer" />
+              </a>
+              <a href="#" className="p-3 bg-blue-500/10 rounded-full">
+              <BsTelegram className="w-5 h-5 text-blue-500 hover:text-blue-400 cursor-pointer" />
+              </a>
+              <a href="#" className="p-3 bg-blue-500/10 rounded-full">
+              <BsLinkedin className="w-5 h-5 text-blue-500 hover:text-blue-400 cursor-pointer" />
+              </a>
+              <a href="#" className="p-3 bg-red-500/10 rounded-full">
+              <BsYoutube className="w-5 h-5 text-red-500 hover:text-red-400 cursor-pointer" />
+              </a>
+            </div>
+            <div className="flex relative mt-5 gap-3 text-xs">
+            <span className=" "> © 2026 Career Adda. All rights reserved. </span>
+            <p className="hover:text-yellow-400 cursor-pointer">Privacy Policy</p>
+            <p className="hover:text-yellow-400 cursor-pointer">Terms & Condition</p>
+            </div>
+           
+          </div>
+        </div>
 
-        <p className="mt-3">
-          Building trusted career opportunities for students & freshers.
-        </p>
 
-        <p className="mt-5 text-sm">
-          © 2026 Career Adda. All rights reserved.
-        </p>
+
       </footer>
     </div>
   );
